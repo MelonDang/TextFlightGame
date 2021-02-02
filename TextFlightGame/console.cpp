@@ -4,13 +4,13 @@
 
 #include <cstdio>
 
-void SetConsolePos(short x, short y)
+void SetConsoleCursorPos(short x, short y)
 {
 	COORD pos = { x, y };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
 
-COORD GetConsolePos()
+COORD GetConsoleCursorPos()
 {
 	CONSOLE_SCREEN_BUFFER_INFO cur_info;
 	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cur_info);
