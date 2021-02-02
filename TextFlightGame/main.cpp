@@ -2,6 +2,7 @@
 #include "flight.h"
 
 #include <cstdio>
+#include <random>
 
 int main()
 {
@@ -12,7 +13,19 @@ int main()
 	int bullet_y = 0;
 	bool is_bullet_exist = false;
 
+	int enemy_x = 0;
+	int enemy_y = 0;
+	bool is_enemy_exist = false;
+
+	std::random_device rd;
+
+	std::mt19937 gen(rd());
+
+	std::uniform_int_distribution<int> dis(0, 28);
+
 	SetConsoleSize(30, 30);
+
+	SetShowCursor(false);
 
 	while (true)
 	{
@@ -33,6 +46,25 @@ int main()
 			bullet_y = plane_y - 1;
 			is_bullet_exist = true;
 		}
+
+		if (!is_enemy_exist)
+		{
+			enemy_x = dis(gen);
+			enemy_y = 0;
+			is_enemy_exist = true;
+		}
+
+		if (is_enemy_exist)
+		{
+			SetConsoleCursorPos(enemy_x, enemy_y);
+			printf("¢¾");
+			enemy_y += 1;
+			if (enemy_y > plane_y)
+			{
+				is_enemy_exist = false;
+			}
+		}
+		
 
 		if (is_bullet_exist)
 		{
