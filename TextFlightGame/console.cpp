@@ -2,6 +2,8 @@
 
 #include "console.h"
 
+#include <cstdio>
+
 void SetConsolePos(short x, short y)
 {
 	COORD pos = { x, y };
@@ -31,4 +33,11 @@ void SetShowCursor(bool flag)
 	GetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cur_info);
 	cur_info.bVisible = flag;
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cur_info);
+}
+
+void SetConsoleSize(int cols, int lines)
+{
+	char command[100];
+	sprintf_s(command, "mode con cols=%d lines=%d", cols, lines);
+	system(command);
 }
